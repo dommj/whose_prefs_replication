@@ -46,6 +46,13 @@ The authors drop WVS waves 1, 2, and 7.
 The authors manually impute democracy scores for several entities (Andorra, Hong Kong, Palestine, Puerto Rico).
 *   **Critique:** While the authors are transparent about this, any manual imputation creates an opportunity for researcher bias. The robustness of the results should be checked by excluding these imputed cases.
 
+5. Missing Structural Indicators (ILOSTAT)
+
+### Union Density and Collective Bargaining
+A key institutional driver of redistribution and wage equality in the political economy literature is the strength of labor unions. 
+*   **Findings:** There is **no use** of ILOSTAT indicators (collective bargaining coverage rate or trade union density rate) in any of the analyzed `.do` files. 
+*   **Critique:** While the paper mentions "unionization" in passing as a potential contributor to the posttax Gini (p. 15), it is never explicitly controlled for or tested as a mechanism. This is a significant omission, as union strength is often highly correlated with both redistributive preferences (through social identity and mobilization) and actual redistribution outcomes. A researcher should test if the "Bottom 5%" effect survives the inclusion of trade union density or collective bargaining coverage.
+
 ## Summary for the Researcher
 To test for p-hacking or errors, the researcher should:
 1.  **Vary the 5% threshold:** Do the results hold at 2%, 10%, or 20%?
@@ -53,3 +60,4 @@ To test for p-hacking or errors, the researcher should:
 3.  **Check for Multicollinearity:** Run VIF tests on the multivariate specifications in Table 1.
 4.  **Recalculate SES Index:** Try within-country PCA or simple standardized averages to see if the pooled PCA weights are driving the result.
 5.  **Use Alternative Years:** Test if matching preferences to SWIID data from 2005 or 2010 (instead of 2015) yields different results.
+6.  **Add Labor Market Controls:** Include union density or collective bargaining coverage from ILOSTAT to see if these structural factors explain the observed correlation between low-SES preferences and redistribution.

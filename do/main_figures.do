@@ -26,8 +26,8 @@ set linesize 80
 
 
 //Import data
-cd ..
-cd "data"
+
+cd "$root/data"
 use redistribution_merged.dta, clear
 
 
@@ -44,8 +44,8 @@ spearman rel_red_imp  att_red_bottom
 local bott = round(r(rho),0.001)
 di `bott'
 
-cd ..
-cd "output"
+
+cd "$root/output"
 
 //Correlation between top preferences and redistribution
 twoway (scatter rel_red_imp att_red_top, sort mcolor(gray)) (lfit rel_red_imp att_red_top, lcolor(black) lwidth(medthick)),  xtitle("Attitudes of the Top 5%", size(medlarge)) ytitle("") legend(off) yscale(lstyle(none)) xscale(lstyle(none))  ylabel(-20 0 20 40 60, angle(horizontal) glcolor(gs14) gmin noticks)  xlabel(1 (1) 7, noticks) xsize(8) ysize(8) text(55 4 "Spearman's rho = `top'") graphregion(fcolor(white) lcolor(white)) plotregion(lcolor(white))  saving(redtop, replace) 
@@ -69,8 +69,7 @@ graph export figure1.eps, replace
 *===============================================================================
 
 //Import data
-cd ..
-cd "data"
+cd "$root/data"
 use expert_clean, clear
 
 
@@ -117,8 +116,8 @@ twoway 	(bar red_bottom_1 red if red == 0 , sort fcolor(white) lcolor(black) lwi
 		name(red_neutral, replace) graphregion(fcolor(white) lcolor(white)) plotregion(lcolor(white)) title("")
 
 //Save figure
-cd ..
-cd "output"
+
+cd "$root/output"
 graph export figure2a.eps, replace 
 
 *===============================================================================
@@ -126,8 +125,8 @@ graph export figure2a.eps, replace
 *===============================================================================
 
 //Import data
-cd ..
-cd "data"
+
+cd "$root/data"
 use laypeople_clean, clear
 
 //Compute shares and SEs
@@ -172,7 +171,6 @@ twoway 	(bar red_bottom_1 red if red == 0 , sort fcolor(white) lcolor(black) lwi
 		name(red, replace) graphregion(fcolor(white) lcolor(white)) plotregion(lcolor(white)) title("")
 		
 //Save figure
-cd ..
-cd "output"
+cd "$root/output"
 graph export figure2b.eps, replace 		
 

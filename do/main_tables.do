@@ -26,8 +26,8 @@ set linesize 80
 *===============================================================================
 
 //Import data
-cd ..
-cd "data"
+
+cd "$root/data"
 use redistribution_merged.dta, clear
 
 
@@ -61,8 +61,7 @@ eststo m6: bootstrap, reps(1000) seed(1): reg rel_red_imp att_red_top att_red_mi
 
 
 //Compute and save table
-cd ..
-cd "output"
+cd "$root/output"
 # delimit ;
 	esttab m1 m2 m3 m4 m5 m6 using "table1.tex", replace 
 	noobs b(3) aux(se 3) nobaselevels style(tex) booktabs label mgroups("Relative redistribution" , pattern(1 0 0 0 0 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}) )
@@ -93,8 +92,8 @@ test [bot_mean]att_red_bottom=[top_mean]att_red_top
 *===============================================================================
 
 //Import data
-cd ..
-cd "data"
+
+cd "$root/data"
 use redistribution_merged.dta, clear
 
 //Create redistribution index
@@ -166,8 +165,8 @@ eststo m8: bootstrap, reps(1000) seed(1): reg red_index att_red_top att_red_mid 
 }
 
 //Compute and save table
-cd ..
-cd "output"
+
+cd "$root/output"
 # delimit ;
 	qui esttab m3 m7  m1 m5 m2 m6  m4 m8   using "table2.tex", replace 
 	noobs b(3) aux(se 3) nobaselevels style(tex) booktabs nomtitles mgroups("\shortstack{Gini\\post-tax}" "Taxes" "\shortstack{Social\\security}" "\shortstack{Redistribution\\index}" , pattern(1 0 1 0 1 0 1 0) prefix(\multicolumn{@span}{c}{) suffix(}) span erepeat(\cmidrule(lr){@span}) )label 
