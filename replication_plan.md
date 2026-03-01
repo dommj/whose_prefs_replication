@@ -94,3 +94,30 @@ Based on the execution of `extension_analysis.do`, the results offer a nuanced v
 4.  **Collinearity between Institutions**: Union Density (TUD) loses significance when Collective Bargaining Coverage is included (Col 4), suggesting that the legal/institutional coverage of bargaining is a more potent predictor than mere membership numbers.
 
 **Conclusion**: The core finding is robust to institutional controls within the restricted sample, but the omission of Collective Bargaining in the original paper was a significant gap in their explanatory model.
+
+## 7. Extension: Institutional and Cultural Moderators
+To go beyond the "who" and investigate the "when," this extension explores the boundary conditions of the poor's influence on redistribution using formal interaction terms.
+
+### Comparison with Original Analysis
+The original paper addresses heterogeneity primarily through **subgroup analysis** (e.g., Table B.11 splits the sample into Democratic vs. Nondemocratic countries; Table B.17 splits by Locus of Control). 
+
+This extension improves upon that approach in three ways:
+1.  **Statistical Power**: By using formal interactions (`##`) instead of sample splits, we utilize the full variance of the dataset and avoid the loss of information that comes from binary binning.
+2.  **Continuous Moderators**: We test continuous moderators like **Pre-tax Gini** and **Moral Universalism**. The original paper uses these only as controls or not at all, missing the chance to see if these factors *condition* the impact of preferences.
+3.  **Formal Significance Tests**: Subgroup analysis shows whether a coefficient is significant *within* a group, but not whether the *difference* between groups is statistically significant. Interaction terms provide a direct test of this difference.
+
+### Research Questions:
+- Is the responsiveness to the Bottom 5% significantly different in democratic vs. nondemocratic regimes?
+- Does high market inequality (Pre-tax Gini) amplify the political weight of the poor's preferences?
+- Does a country's level of "Moral Universalism" act as a moderator for redistributive responsiveness?
+
+### Implementation Plan
+1.  **Model Specification**: 
+    - Dependent Variable: `rel_red_imp`
+    - Key Independent Variable: `att_red_bottom`
+    - Interaction Terms: 
+        - `att_red_bottom # c.dem_ANRR`
+        - `att_red_bottom # c.gini_mkt`
+        - `att_red_bottom # c.trust_universal`
+2.  **Do-file**: `do/extension_interactions.do`
+3.  **Output**: `output/extension_interactions.tex`
