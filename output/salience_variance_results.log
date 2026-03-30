@@ -1,0 +1,81 @@
+---------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/domj/Library/CloudStorage/OneDrive-Personal/Docum
+> ents/BSE/Political Economy/final_project/whose_prefs_replication/da
+> ta/../output/salience_variance_results.log
+  log type:  text
+ opened on:  27 Mar 2026, 17:01:05
+
+. display "Salience Test Results"
+Salience Test Results
+
+. display "Date: $S_DATE $S_TIME"
+Date: 27 Mar 2026 17:01:05
+
+. display "--------------------------------------------------"
+--------------------------------------------------
+
+. display "Pooled Levene's Test (Across all countries):"
+Pooled Levene's Test (Across all countries):
+
+. robvar att_red, by(ses_group)
+
+            | Summary of Red. pref. (9=Equality)
+  ses_group |        Mean   Std. dev.       Freq.
+------------+------------------------------------
+     Top 5% |   3.6106945   2.8370601      13,334
+  Bottom 5% |   4.8749007   3.2209642      12,590
+------------+------------------------------------
+      Total |   4.2246567   3.0947166      25,924
+
+W0  =  445.96202   df(1, 25922)     Pr > F = 0.00000000
+
+W50 =  478.84919   df(1, 25922)     Pr > F = 0.00000000
+
+W10 =  518.29388   df(1, 25922)     Pr > F = 0.00000000
+
+. display "--------------------------------------------------"
+--------------------------------------------------
+
+. display "Paired T-test of Country-Level Standard Deviations:"
+Paired T-test of Country-Level Standard Deviations:
+
+. use `country_vars', clear
+
+. ttest sd_bottom == sd_top
+
+Paired t test
+---------------------------------------------------------------------
+> ---------
+Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. 
+> interval]
+---------+-----------------------------------------------------------
+> ---------
+sd_bot~m |      95    2.980724    .0445112    .4338413    2.892346   
+>  3.069102
+  sd_top |      95    2.675822    .0426779    .4159728    2.591084   
+>   2.76056
+---------+-----------------------------------------------------------
+> ---------
+    diff |      95     .304902    .0444032     .432789    .2167384   
+>  .3930657
+---------------------------------------------------------------------
+> ---------
+     mean(diff) = mean(sd_bottom - sd_top)                        t =
+>    6.8667
+ H0: mean(diff) = 0                              Degrees of freedom =
+>        94
+
+ Ha: mean(diff) < 0           Ha: mean(diff) != 0           Ha: mean(
+> diff) > 0
+ Pr(T < t) = 1.0000         Pr(|T| > |t|) = 0.0000          Pr(T > t)
+>  = 0.0000
+
+. log close
+      name:  <unnamed>
+       log:  /Users/domj/Library/CloudStorage/OneDrive-Personal/Docum
+> ents/BSE/Political Economy/final_project/whose_prefs_replication/da
+> ta/../output/salience_variance_results.log
+  log type:  text
+ closed on:  27 Mar 2026, 17:01:08
+---------------------------------------------------------------------

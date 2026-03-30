@@ -1,0 +1,50 @@
+\begin{table}[htbp]\centering
+\caption{IV Results: Instrumenting with Legal Origins}
+\begin{tabular}{l*{3}{c}}
+\toprule
+                    &\multicolumn{2}{c}{First Stage}&\multicolumn{1}{c}{Second Stage}\\
+                    &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+                    &\multicolumn{1}{c}{CBC Rate}&\multicolumn{1}{c}{Bottom $\times$ CBC}&\multicolumn{1}{c}{Redistribution}\\
+\midrule
+Instrument: English Common Law Origin&      10.230&      71.376&            \\
+                    &    (23.870)&   (118.080)&            \\
+\addlinespace
+Bottom 5% Pref. $\times$ Common Law&      -5.252&     -31.198&            \\
+                    &     (4.646)&    (24.146)&            \\
+\addlinespace
+Top 5\%             &      -5.364&     -35.203&       1.152\\
+                    &     (4.237)&    (22.995)&     (4.949)\\
+\addlinespace
+Middle 5\%          &      12.341&      72.105&      -6.060\\
+                    &     (5.213)&    (28.642)&     (4.899)\\
+\addlinespace
+Bottom 5\%          &      -0.235&      23.167&       2.147\\
+                    &     (4.384)&    (26.186)&    (14.405)\\
+\addlinespace
+ln(GDP per capita)  &       9.580&      52.238&       2.836\\
+                    &     (3.694)&    (19.607)&     (1.969)\\
+\addlinespace
+ln(Population)      &      -2.286&     -12.424&      -1.028\\
+                    &     (1.813)&     (9.924)&     (0.899)\\
+\addlinespace
+Democracy           &      -5.947&     -34.665&       6.159\\
+                    &     (7.147)&    (38.417)&     (3.663)\\
+\addlinespace
+Gini pre-tax        &       0.286&       0.951&       0.717\\
+                    &     (0.496)&     (2.569)&     (0.514)\\
+\addlinespace
+Coll. Bargaining Coverage&            &            &      -0.540\\
+                    &            &            &     (3.376)\\
+\addlinespace
+Bottom 5% Pref. $\times$ CBC Rate&            &            &       0.157\\
+                    &            &            &     (0.624)\\
+\addlinespace
+Constant            &     -84.403&    -554.805&     -38.394\\
+                    &    (36.616)&   (196.062)&    (62.510)\\
+\midrule
+F-stat (Instruments)&        2.80&        2.68&            \\
+K-P Rank F-stat     &            &            &           .\\
+N                   &          61&          61&          61\\
+\bottomrule
+\end{tabular}
+\end{table}

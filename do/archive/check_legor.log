@@ -1,0 +1,51 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      StataNow 19.5
+___/   /   /___/   /   /___/       SE—Standard Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: Unlimited-user network, expiring  3 Jun 2026
+Serial number: 401909316333
+  Licensed to: Dominic Jones
+               
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+. do check_legor.do 
+
+. use "../data/redistribution_augmented.dta", clear
+
+. tab legor_uk, m
+
+   legor_uk |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         49       75.38       75.38
+          1 |         16       24.62      100.00
+------------+-----------------------------------
+      Total |         65      100.00
+
+. tab legor, m
+
+      legor |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |         16       24.62       24.62
+          2 |         31       47.69       72.31
+          3 |         15       23.08       95.38
+          4 |          3        4.62      100.00
+------------+-----------------------------------
+      Total |         65      100.00
+
+. list country_str iso3 legor_uk if missing(legor_uk)
+
+. 
+end of do-file

@@ -1,0 +1,231 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      StataNow 19.5
+___/   /   /___/   /   /___/       SE—Standard Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: Unlimited-user network, expiring  3 Jun 2026
+Serial number: 401909316333
+  Licensed to: Dominic Jones
+               
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+. do IV_extension.do 
+
+. *============================================================================
+> ===
+. * IV ANALYSIS: 2SLS WITH FORMAL IDENTIFICATION TABLE
+. *============================================================================
+> ===
+. 
+. // 1. Load the Augmented Dataset
+. // This dataset already contains the redistribution preferences and ILO insti
+> tutional data
+. use "../data/redistribution_augmented.dta", clear
+
+. 
+. // 2. Prepare Variables for IV Analysis
+. // We use English Common Law origin as an instrument for Collective Bargainin
+> g Coverage
+. gen common_law = legor_uk
+
+. label var common_law "Instrument: English Common Law Origin"
+
+. 
+. // Create the endogenous interaction term: Bottom 5% Preferences x CBC Rate
+. gen cbc_interaction = att_red_bottom * cbc_rate
+(3 missing values generated)
+
+. label var cbc_interaction "Bottom 5% Pref. $\times$ CBC Rate"
+
+. 
+. // Create the instrument interaction term: Bottom 5% Preferences x Common Law
+. gen iv_interaction = common_law * att_red_bottom
+(3 missing values generated)
+
+. label var iv_interaction "Bottom 5% Pref. $\times$ Common Law"
+
+. 
+. // Locals for controls and preference variables
+. local base_controls lngdp lnpop dem_ANRR gini_mkt
+
+. local ses_prefs att_red_top att_red_mid att_red_bottom
+
+. 
+. // Define the endogenous variables and instruments
+. local endogenous cbc_rate cbc_interaction
+
+. local instruments common_law iv_interaction
+
+. 
+. *----------------------------------------------------------------------------
+> ---
+. * 1. Manual First-Stage Regressions (For the Table)
+. *----------------------------------------------------------------------------
+> ---
+. eststo clear
+
+. 
+. // First Stage for the Institutional Main Effect (CBC Rate)
+. eststo fs_cbc: reg cbc_rate `instruments' `ses_prefs' `base_controls', vce(ro
+> bust)
+
+Linear regression                               Number of obs     =         61
+                                                F(9, 51)          =       7.13
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.3742
+                                                Root MSE          =     23.617
+
+------------------------------------------------------------------------------
+             |               Robust
+    cbc_rate | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  common_law |   10.23045   23.87035     0.43   0.670    -37.69128    58.15218
+iv_interac~n |  -5.251663   4.646327    -1.13   0.264    -14.57955    4.076228
+ att_red_top |   -5.36433   4.237428    -1.27   0.211    -13.87132    3.142662
+ att_red_mid |   12.34079   5.212841     2.37   0.022     1.875575    22.80601
+att_red_bo~m |   -.234642   4.383582    -0.05   0.958     -9.03505    8.565766
+       lngdp |   9.579507   3.694483     2.59   0.012     2.162524    16.99649
+       lnpop |   -2.28633   1.812659    -1.26   0.213    -5.925396    1.352735
+    dem_ANRR |  -5.947074   7.146558    -0.83   0.409    -20.29439     8.40024
+    gini_mkt |   .2861715   .4956708     0.58   0.566    -.7089291    1.281272
+       _cons |  -84.40261   36.61602    -2.31   0.025    -157.9123   -10.89287
+------------------------------------------------------------------------------
+
+.     test `instruments'
+
+ ( 1)  common_law = 0
+ ( 2)  iv_interaction = 0
+
+       F(  2,    51) =    2.80
+            Prob > F =    0.0703
+
+.     estadd scalar f_stat = r(F)
+
+added scalar:
+             e(f_stat) =  2.7984465
+
+. 
+. // First Stage for the Interaction Term (Bottom 5% x CBC Rate)
+. eststo fs_int: reg cbc_interaction `instruments' `ses_prefs' `base_controls',
+>  vce(robust)
+
+Linear regression                               Number of obs     =         61
+                                                F(9, 51)          =       8.98
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.4734
+                                                Root MSE          =     129.73
+
+------------------------------------------------------------------------------
+             |               Robust
+cbc_intera~n | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+  common_law |   71.37646     118.08     0.60   0.548     -165.679    308.4319
+iv_interac~n |  -31.19806   24.14585    -1.29   0.202    -79.67287    17.27675
+ att_red_top |  -35.20253   22.99506    -1.53   0.132    -81.36705    10.96199
+ att_red_mid |   72.10516   28.64164     2.52   0.015     14.60466    129.6057
+att_red_bo~m |   23.16727   26.18564     0.88   0.380    -29.40259    75.73713
+       lngdp |   52.23794   19.60749     2.66   0.010     12.87425    91.60163
+       lnpop |  -12.42398   9.923569    -1.25   0.216    -32.34638    7.498411
+    dem_ANRR |   -34.6646   38.41732    -0.90   0.371    -111.7906    42.46139
+    gini_mkt |    .950539   2.568868     0.37   0.713    -4.206679    6.107757
+       _cons |  -554.8055   196.0621    -2.83   0.007    -948.4165   -161.1944
+------------------------------------------------------------------------------
+
+.     test `instruments'
+
+ ( 1)  common_law = 0
+ ( 2)  iv_interaction = 0
+
+       F(  2,    51) =    2.68
+            Prob > F =    0.0785
+
+.     estadd scalar f_stat = r(F)
+
+added scalar:
+             e(f_stat) =  2.6760149
+
+. 
+. *----------------------------------------------------------------------------
+> ---
+. * 2. Second-Stage (The Main IV Result)
+. *----------------------------------------------------------------------------
+> ---
+. // We instrument for both the CBC rate and its interaction with preferences
+. eststo second_stage: ivregress 2sls rel_red_imp `ses_prefs' `base_controls' /
+> //
+>     (`endogenous' = `instruments'), vce(robust)
+
+Instrumental-variables 2SLS regression            Number of obs   =         61
+                                                  Wald chi2(9)    =     104.10
+                                                  Prob > chi2     =     0.0000
+                                                  R-squared       =     0.5231
+                                                  Root MSE        =     10.651
+
+------------------------------------------------------------------------------
+             |               Robust
+ rel_red_imp | Coefficient  std. err.      z    P>|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+    cbc_rate |  -.5396649   3.376356    -0.16   0.873    -7.157201    6.077871
+cbc_intera~n |   .1567061   .6238853     0.25   0.802    -1.066087    1.379499
+ att_red_top |   1.151956   4.949349     0.23   0.816    -8.548589     10.8525
+ att_red_mid |  -6.059595   4.898953    -1.24   0.216    -15.66137    3.542177
+att_red_bo~m |   2.147372   14.40499     0.15   0.881    -26.08588    30.38063
+       lngdp |   2.835986    1.96879     1.44   0.150    -1.022771    6.694743
+       lnpop |  -1.027868    .899011    -1.14   0.253    -2.789897    .7341615
+    dem_ANRR |    6.15874   3.662955     1.68   0.093    -1.020519      13.338
+    gini_mkt |   .7165844   .5140971     1.39   0.163    -.2910274    1.724196
+       _cons |  -38.39405    62.5102    -0.61   0.539    -160.9118    84.12369
+------------------------------------------------------------------------------
+Endogenous: cbc_rate cbc_interaction
+Exogenous:  att_red_top att_red_mid att_red_bottom lngdp lnpop dem_ANRR
+            gini_mkt common_law iv_interaction
+
+. 
+.     // Capture the Kleibergen-Paap rk Wald F statistic (Robust version of Cra
+> gg-Donald)
+.     quietly estat firststage
+
+.     matrix first = r(singleresults)
+
+.     estadd scalar kp_f = r(idstat)
+
+added scalar:
+               e(kp_f) =  .
+
+. 
+. *----------------------------------------------------------------------------
+> ---
+. * 3. Export Identification Table
+. *----------------------------------------------------------------------------
+> ---
+. # delimit ;
+delimiter now ;
+. esttab fs_cbc fs_int second_stage using "../output/iv_identification_table.te
+> x", replace 
+>     b(3) se(3) label booktabs style(tex)
+>     mgroups("First Stage" "Second Stage", pattern(1 0 1) prefix(\multicolumn{
+> @span}{c}{) suffix(}) span)
+>     mtitle("CBC Rate" "Bottom $\times$ CBC" "Redistribution")
+>     stats(f_stat kp_f N, fmt(2 2 0) 
+>           labels("F-stat (Instruments)" "K-P Rank F-stat" "N"))
+>     title("IV Results: Instrumenting with Legal Origins")
+>     interaction(" $\times$ ")  nonotes stardetach nostar ;
+(file ../output/iv_identification_table.tex not found)
+(output written to ../output/iv_identification_table.tex)
+
+. # delimit cr
+delimiter now cr
+. 
+end of do-file

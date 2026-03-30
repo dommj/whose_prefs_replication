@@ -1,0 +1,256 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      StataNow 19.5
+___/   /   /___/   /   /___/       SE—Standard Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: Unlimited-user network, expiring  3 Jun 2026
+Serial number: 401909316333
+  Licensed to: Dominic Jones
+               
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+. do inspect_data.do 
+
+. use "../data/redistribution_augmented.dta", clear
+
+. describe
+
+Contains data from ../data/redistribution_augmented.dta
+ Observations:            65                  
+    Variables:           177                  1 Mar 2026 16:53
+                                              (_dta has notes)
+-------------------------------------------------------------------------------
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+-------------------------------------------------------------------------------
+country         int     %8.0g      S003       ISO 3166-1 numeric country code
+age             float   %9.0g                 (mean) age
+male            float   %9.0g                 (mean) male
+married         float   %9.0g                 (mean) married
+children        float   %9.0g                 (mean) children
+employed        float   %9.0g                 (mean) employed
+unemployed      float   %9.0g                 (mean) unemployed
+work_public     float   %9.0g                 (mean) work_public
+work_manual     float   %9.0g                 (mean) work_manual
+work_routine    float   %9.0g                 (mean) work_routine
+immig_parent    float   %9.0g                 (mean) immig_parent
+work_supervis   float   %9.0g                 (mean) work_supervis
+class           float   %9.0g                 Social class
+income          float   %9.0g                 Income
+educ            float   %9.0g                 Education
+income_cs       float   %9.0g                 (mean) income_cs
+political       float   %9.0g                 (mean) political
+polpart_memb    float   %9.0g                 (mean) polpart_memb
+polpart_memb_~v float   %9.0g                 (mean) polpart_memb_activ
+polac_petition  float   %9.0g                 (mean) polac_petition
+polac_boycott   float   %9.0g                 (mean) polac_boycott
+polac_demo      float   %9.0g                 (mean) polac_demo
+polac_strike    float   %9.0g                 (mean) polac_strike
+polpar_index    float   %9.0g                 (mean) polpar_index
+conf_gov        float   %9.0g                 Confidence in government
+prob_count_po~y float   %9.0g                 (mean) prob_count_poverty
+prob_count_di~r float   %9.0g                 (mean) prob_count_discr
+prob_count_sa~t float   %9.0g                 (mean) prob_count_sanit
+prob_count_educ float   %9.0g                 (mean) prob_count_educ
+prob_count_en~n float   %9.0g                 (mean) prob_count_environ
+trust_family    float   %9.0g                 (mean) trust_family
+trust_neighbor  float   %9.0g                 (mean) trust_neighbor
+trust_personal  float   %9.0g                 (mean) trust_personal
+trust_ingroup   float   %9.0g                 (mean) trust_ingroup
+trust_first     float   %9.0g                 (mean) trust_first
+trust_relig     float   %9.0g                 (mean) trust_relig
+trust_nat       float   %9.0g                 (mean) trust_nat
+trust_outgroup  float   %9.0g                 (mean) trust_outgroup
+trust_universal float   %9.0g                 Moral Universalism
+att_red         float   %9.0g                 Attitude Redistribution
+index           float   %9.0g                 Social Class Index
+top_index       float   %9.0g                 Top 5\%
+bottom_index    float   %9.0g                 Bottom 5\%
+mid_index       float   %9.0g                 Middle 5\%
+top_index10     float   %9.0g                 (mean) top_index10
+bottom_index10  float   %9.0g                 (mean) bottom_index10
+mid_index10     float   %9.0g                 (mean) mid_index10
+tert_index      float   %9.0g                 (mean) tert_index
+top_indextert   float   %9.0g                 (mean) top_indextert
+mid_indextert   float   %9.0g                 (mean) mid_indextert
+bottom_indext~t float   %9.0g                 (mean) bottom_indextert
+top_incval      float   %9.0g                 (mean) top_incval
+mid_incval      float   %9.0g                 (mean) mid_incval
+bottom_incval   float   %9.0g                 (mean) bottom_incval
+att_red_top     float   %9.0g                 Top 5\%
+att_red_mid     float   %9.0g                 Middle 5\%
+att_red_bottom  float   %9.0g                 Bottom 5\%
+att_red_top10   float   %9.0g                 Top 10\%
+att_red_mid10   float   %9.0g                 Middle 10\%
+att_red_bott~10 float   %9.0g                 Bottom 10\%
+att_red_toptert float   %9.0g                 Top 33\%
+att_red_midtert float   %9.0g                 Middle 33\%
+att_red_botto~t float   %9.0g                 Bottom 33\%
+median_att_red  float   %9.0g                 (mean) median_att_red
+mode_att_red    float   %9.0g                 (mean) mode_att_red
+dist_med_top    float   %9.0g                 (mean) dist_med_top
+dist_med_mid    float   %9.0g                 (mean) dist_med_mid
+dist_med_bottom float   %9.0g                 (mean) dist_med_bottom
+dist_mode_top   float   %9.0g                 (mean) dist_mode_top
+dist_mode_mid   float   %9.0g                 (mean) dist_mode_mid
+dist_mode_bot~m float   %9.0g                 (mean) dist_mode_bottom
+att_red_topin~l float   %9.0g                 Top income
+att_red_midin~l float   %9.0g                 Middle income
+att_red_botin~l float   %9.0g                 Bottom income
+conf_gov_top    float   %9.0g                 (mean) conf_gov_top
+conf_gov_mid    float   %9.0g                 (mean) conf_gov_mid
+conf_gov_bottom float   %9.0g                 (mean) conf_gov_bottom
+polpar_top      float   %9.0g                 Polit. activ. Top 5\%
+polpar_mid      float   %9.0g                 Polit. activ. Middle 5\%
+polpar_bottom   float   %9.0g                 Polit. activ. Bottom 5\%
+belief_control  float   %9.0g                 (mean) belief_control
+belief_contro~p float   %9.0g                 (mean) belief_control_top
+belief_contro~d float   %9.0g                 (mean) belief_control_mid
+belief_contro~m float   %9.0g                 (mean) belief_control_bottom
+year            float   %9.0g                 (lastnm) year
+country_year    float   %9.0g                 (lastnm) country_year
+country_str     str95   %95s                  (lastnm) country_str
+n_sample        double  %9.0g                 (rawsum) sample
+n_top           double  %9.0g                 (rawsum) top_index
+n_mid           double  %9.0g                 (rawsum) mid_index
+n_bottom        double  %9.0g                 (rawsum) bottom_index
+n_top10         double  %9.0g                 (rawsum) top_index10
+n_mid10         double  %9.0g                 (rawsum) mid_index10
+n_bottom10      double  %9.0g                 (rawsum) bottom_index10
+n_toptert       double  %9.0g                 (rawsum) top_indextert
+n_midtert       double  %9.0g                 (rawsum) mid_indextert
+n_bottomtert    double  %9.0g                 (rawsum) bottom_indextert
+n_topincval     double  %9.0g                 (rawsum) top_incval
+n_midincval     double  %9.0g                 (rawsum) mid_incval
+n_botincval     double  %9.0g                 (rawsum) bottom_incval
+year_swiid      int     %8.0g                 
+gini_disp       float   %9.0g                 Gini post-tax
+gini_disp_se    float   %9.0g                 
+gini_mkt        float   %9.0g                 Gini pre-tax
+gini_mkt_se     float   %9.0g                 
+abs_red         float   %9.0g                 
+abs_red_se      float   %9.0g                 
+rel_red         float   %9.0g                 
+rel_red_se      float   %9.0g                 
+rel_red_imp     float   %9.0g                 Relative Redistribution
+abs_red_imp     float   %9.0g                 Absolute Redistribution
+year_imf_gdp    int     %8.0g                 
+gdp_pc_ppp      double  %10.0g                
+year_imf_pop    int     %8.0g                 
+population      double  %10.0g                
+wbcode          str22   %22s                  World Bank country code
+year_dem_ANRR   double  %9.0g                 Year (from 1960 to 2010)
+dem_ANRR        float   %9.0g                 Democracy
+year_polity2    int     %10.0g                year
+polity2         byte    %10.0g                Polity score
+democratic      float   %9.0g                 Democracy
+year_hief       int     %8.0g                 Year
+efindex         float   %9.0g                 Ethnic fractionalization
+code            str30   %30s                  code
+legor_uk        byte    %10.0g                legor_uk
+legor_fr        byte    %10.0g                legor_fr
+legor_ge        byte    %10.0g                legor_ge
+legor_sc        byte    %10.0g                legor_sc
+legor_so        byte    %10.0g                legor_so
+legor           float   %9.0g                 
+year_rpe        int     %10.0g                (firstnm) year
+rpe_agri        double  %10.0g                (firstnm) rpe_agri
+rpe_gdp         double  %10.0g                RPE
+rpe_gdp_nonres  double  %10.0g                RPE (non-res)
+tax_nonres      double  %10.0g                Taxes (non-res)
+tax             double  %10.0g                Taxes
+gdppc           double  %10.0g                (firstnm) gdppc
+socsec          double  %10.0g                Soc. sec. taxes
+pop             long    %10.0g                (firstnm) pop
+edu_share       double  %10.0g                Educ. exp.
+se_share        double  %10.0g                Soc. prot. exp.
+year_wti        float   %9.0g                 
+id_un           int     %8.0g                 Country identifier as specified
+                                                by the United Nations
+wb_classif      float   %12.0g     wb_classif
+                                              World Bank classification
+region          str23   %23s                  Region
+oecd            byte    %8.0g                 =1 if OECD country
+toprate         float   %9.0g                 Top statutory marginal PIT rate,
+                                                %
+ARP_all         float   %9.0g                 average tax rate progressions up
+                                                to an income level equivalent
+                                                to four times y
+ARP_mid         float   %9.0g                 average tax rate progressions for
+                                                the levels of income between y
+                                                and 3y
+MRP_all         float   %9.0g                 average tax rate progressions up
+                                                to an income level equivalent
+                                                to four times y
+MRP_mid         float   %9.0g                 average tax rate progressions for
+                                                the levels of income between y
+                                                and 3y
+AR_y            float   %9.0g                 Average tax rate for income
+                                                equivalent to y
+AR_2y           float   %9.0g                 Average tax rate for income
+                                                equivalent to 2y
+AR_3y           float   %9.0g                 Average tax rate for income
+                                                equivalent to 3y
+AR_4y           float   %9.0g                 Average tax rate for income
+                                                equivalent to 4y
+MR_y            float   %9.0g                 Marginal tax rate for income
+                                                equivalent to y
+MR_2y           float   %9.0g                 Marginal tax rate for income
+                                                equivalent to 2y
+MR_3y           float   %9.0g                 Marginal tax rate for income
+                                                equivalent to 3y
+MR_4y           float   %9.0g                 Marginal tax rate for income
+                                                equivalent to 4y
+lngdp           float   %9.0g                 ln(GDP per capita)
+lnpop           float   %9.0g                 ln(Population)
+iso3            str3    %9s                   
+source_cbc      str8    %9s                   source_CBC
+time_cbc        int     %8.0g                 time_CBC
+cbc_rate        float   %9.0g                 Coll. Bargaining Coverage
+source_tud      str8    %9s                   source_TUD
+time_tud        int     %8.0g                 time_TUD
+tud_rate        float   %9.0g                 Union Density
+iloregion       str23   %23s                  
+ilosubregionb~d str37   %37s                  
+worldbankinco~p str19   %19s                  
+levels          byte    %8.0g                 
+levels_label    str117  %117s                 
+_est_m1         byte    %8.0g                 esample() from estimates store
+_est_m2         byte    %8.0g                 esample() from estimates store
+_est_m3         byte    %8.0g                 esample() from estimates store
+_est_m4         byte    %8.0g                 esample() from estimates store
+-------------------------------------------------------------------------------
+Sorted by: 
+
+. list country_str iso3 in 1/10
+
+     +-------------------------------+
+     |            country_str   iso3 |
+     |-------------------------------|
+  1. |                Albania    ALB |
+  2. |              Argentina    ARG |
+  3. |                Armenia    ARM |
+  4. |              Australia    AUS |
+  5. |             Bangladesh    BGD |
+     |-------------------------------|
+  6. | Bosnia and Herzegovina    BIH |
+  7. |                 Brazil    BRA |
+  8. |               Bulgaria    BGR |
+  9. |                 Canada    CAN |
+ 10. |                  Chile    CHL |
+     +-------------------------------+
+
+. 
+end of do-file
